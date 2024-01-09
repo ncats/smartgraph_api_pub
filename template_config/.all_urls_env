@@ -1,0 +1,6 @@
+# local (use this for local testing, URLs and hostnames reflect inter-Docker container communication)
+local_url_sg_swagger=http://localhost:5070/docs
+# ci
+ci_url_sg_swagger=qa_url/docs
+# prod
+prod_url_sg_swagger=prod_url/docs
