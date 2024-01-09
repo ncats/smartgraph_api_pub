@@ -1,0 +1,132 @@
+# Ref: https://docs.docker.com/compose/gettingstarted/
+# Ref: https://stackoverflow.com/questions/40248908/context-or-workdir-for-docker-compose
+# Ref: https://docs.docker.com/compose/reference/up/
+# Ref: https://docs.docker.com/engine/reference/commandline/compose_pull/
+# Ref: https://stackoverflow.com/questions/41637505/how-to-persist-data-in-a-dockerized-postgres-database-using-volumes
+# Ref: https://docs.docker.com/compose/environment-variables/
+# Ref: https://dimmaski.com/env-files-docker/
+# Ref: https://stackoverflow.com/questions/5143984/multiple-commits-before-pushing
+# Ref: https://ardalis.com/speed-up-docker-compose-with-parallel-builds/
+# Ref: https://docs.docker.com/compose/startup-order/
+# Ref: https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on
+# Ref: https://memgraph.com/blog/how-to-migrate-from-neo4j-to-memgraph
+# Ref: https://neo4j.com/docs/ops-manager/current/docker/compose/
+# Ref: https://community.neo4j.com/t5/drivers-stacks/cannot-plugin-quot-apoc-quot-in-docker-compose-yml-file/m-p/56924
+# Ref: https://forums.docker.com/t/error-services-db-environment-must-be-a-mapping/120667
+# Ref: https://formulae.brew.sh/formula/openjdk
+
+version: "3.3"
+
+services:
+    # Neo4J instance for SmartGraph
+    sg_neo4j:
+        # Base docker settings 
+        image: neo4j:5.7.0-community
+        hostname: sg_neo4j
+        container_name: sg_neo4j
+
+        # Set environment to run Neo4J
+        environment:
+            # Base Neo4J settings
+            NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
+            NEO4J_DEBUG: yes # Change to 'yes' for debug logging
+            # Java settings
+            NEO4J_server_memory_heap_initial__size: 2G
+            NEO4J_server_memory_heap_max__size: 4G
+            NEO4J_db_transaction_timeout: 5m
+            # Security settings
+            NEO4J_dbms_security_procedures_unrestricted: apoc.\\\*,gds.\\\*
+            NEO4J_server_bolt_listen__address: 0.0.0.0:${neo4j_port_bolt}
+            # NEO4J_server_bolt_advertised__address: localhost:${neo4j_port_bolt}
+            # Apoc Plugin settings
+            NEO4JLABS_PLUGINS: '["apoc"]'
+            NEO4J_apoc_export_file_enabled: true
+            NEO4J_apoc_import_file_enabled: true
+            NEO4J_apoc_import_file_use__neo4j+_config: true
+
+        # Add ENV file with additional private variables
+        env_file:
+            - ./.env
+
+        # Port configuration
+        ports:
+            - "${neo4j_port_web_client}:${neo4j_port_web_client}"
+            - "${neo4j_port_bolt}:${neo4j_port_bolt}"
+
+        # Volume configuration
+        volumes:
+            - $HOME/docker/smartgraph_volume/neo4j_data:/data
+
+        # Network configuration
+        networks:
+            sgnw:
+                aliases:
+                    - sg_neo4j
+
+    # SmartGraph API service
+    smartgraph_api:
+        # Base docker settings 
+        container_name: smartgraph_api
+        depends_on:
+            - sg_neo4j
+
+        # Dockerfile build context
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+            
+        # Add ENV file with additional private variables
+        env_file:
+            - ./.env
+
+        # Override docker network aliases
+        environment:
+            - neo4j_host=sg_neo4j
+            - SMARTGRAPH_UI_URL=${url_sg_ui}
+            - SMARTGRAPH_API_SWAGGER_URL=${url_sg_swagger}
+            - SMARTGRAPH_API_BASE_PATH=/api
+
+        # Port configuration
+        ports:
+            - "${sg_api_int_port}:${sg_api_int_port}"
+
+        # Network configuration
+        networks:
+            sgnw:
+                aliases:
+                    - smartgraph_api
+    
+    # SmartGraph WebSocket service
+    smartgraph_websocket_server:
+        # Base docker settings 
+        container_name: smartgraph_websocket_server
+        depends_on:
+            - sg_neo4j
+
+        # Dockerfile build context
+        build:
+            context: ./websocket-server/
+            dockerfile: ./Dockerfile
+            
+        # Add ENV file with additional private variables
+        env_file:
+            - ./.env
+
+        # Override docker network aliases
+        environment:
+            - neo4j_host=sg_neo4j
+            - sg_websocket_base_path=/ws
+
+        # Port configuration
+        ports:
+            - "${sg_websocket_server_port}:${sg_websocket_server_port}"
+
+        # Network configuration
+        networks:
+            sgnw:
+                aliases:
+                    - smartgraph_websocket_server
+
+# Docker network configuration
+networks:
+    sgnw:

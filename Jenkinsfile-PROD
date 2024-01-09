@@ -1,0 +1,95 @@
+pipeline {
+    options {
+        skipDefaultCheckout()
+        timestamps()
+    }
+    agent {
+        node { label 'smartgraph-prod' }
+    }
+    parameters {
+        string(name: 'BUILD_VERSION', defaultValue: '', description: '')
+        string(name: 'ENVIRONMENT', defaultValue: 'prod', description: 'Role Name (mandatory)')
+    }
+    environment {
+        PROJECT_NAME = 'smartgraph'
+        INIT_TOKEN   = credentials('Vault-Access')                                   // OIDC provider this token is Auto Generated //
+        SPHINX_TOKEN = credentials('ncatssvcdvops-sphinx')                           // PatToken Read Only Access for the DevOps Artifacts Repo https://github.com/Sphinx-Automation/devops-pipeline-artifacts.git //
+        NCATS_TOKEN = credentials('ncatssvcdvops-ncats')                             // PatToken Read Only Access for Settings Repo https://github.com/Sphinx-Automation/devops-pipeline-artifacts.git for facilities.json //
+        ROLE_NAME    = "$ENVIRONMENT-$PROJECT_NAME"
+        APP_TYPE     = "api"
+        ENVIRONMENT = 'prod'
+        ENV = 'prod' 
+    }
+    stages {
+        stage('Docker/NpmJs Secrets By Role') {
+            steps {
+                cleanWs()
+                checkout scm
+                script {
+                    sh '''
+                            ### Cloning the Artifacts from DevOps Artifacts Repo ###
+                            git clone https://$SPHINX_TOKEN@github.com/Sphinx-Automation/devops-pipeline-artifacts.git
+
+                             ### Running the script with Env specific to Authenticate Vault & Get Application Secrets  ###
+                            cd devops-pipeline-artifacts/application && /bin/bash getAppSecretsByRole.sh && /bin/bash getNcatsDockerSecretsByRole.sh && /bin/bash getNpmJsSecretsByRole.sh      
+                        '''
+                }
+            }
+        }
+        stage('deploy docker') {
+            steps {
+                // Passing Varibles prepare.sh to retrive NPMJS TOKEN & DOCKER AUTHENTICATION //
+                configFileProvider(
+                [configFile(fileId: 'aicp-smartgraph-docker-compose-prod.yml', targetLocation: 'docker-compose.yml'),
+                 configFile(fileId: 'prepare.sh', targetLocation: 'prepare.sh'),
+                 configFile(fileId: 'replace.py', targetLocation: 'replace.py')]) {
+                    withEnv([
+                            "PROJECT_NAME=smartgraph",
+                            "ENVIRONMENT=prod",
+                            "ENV=prod",
+                            "BUILD_VERSION=" + (params.BUILD_VERSION ?: env.BUILD_VERSION),                          
+                            "ROLE_NAME=$ENV-$PROJECT_NAME",
+                            "APP_TYPE=api",
+                            "DOCKER_REPO_NAME_1=ncats/smartgraph_api",
+                            "DOCKER_REPO_NAME_2=ncats/smartgraph_websocket_server"
+                        ]) {
+                    script {
+                        sh '''#!/bin/bash
+                        pwd
+                        ls -la
+                        cat /home/deploy/config/local | python3 configure.py /home/deploy/config/sg_data_exchange/
+                        pwd
+                        ls -la
+                        '''
+                        sh '''#!/bin/bash
+                            cp devops-pipeline-artifacts/application/creds.json .
+                            python3 replace.py
+                            ls -lsa
+                            pwd
+                            chmod 644 websocket-server/*
+                            docker-compose down -v --rmi all | xargs echo
+                            docker pull $DOCKER_REPO_NAME_1:$BUILD_VERSION
+                            docker rmi $DOCKER_REPO_NAME_1:current | xargs echo
+                            docker tag $DOCKER_REPO_NAME_1:$BUILD_VERSION $DOCKER_REPO_NAME_1:current
+                            docker pull $DOCKER_REPO_NAME_2:$BUILD_VERSION
+                            docker rmi $DOCKER_REPO_NAME_2:current | xargs echo
+                            docker tag $DOCKER_REPO_NAME_2:$BUILD_VERSION $DOCKER_REPO_NAME_2:current
+                            docker-compose up -d
+                            sleep 100
+                            docker stop smartgraph-api-smartgraph_websocket_server-1
+                            docker start smartgraph-api-smartgraph_websocket_server-1
+
+                            '''
+                        }
+                    }
+                }
+            }
+            post {
+               always {
+                    echo " Clean up the workspace in deploy node!"
+                    //cleanWs()
+                }
+            }
+        }
+    }
+}
