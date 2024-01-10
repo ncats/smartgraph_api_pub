@@ -1,0 +1,20 @@
+{
+  "name": "smartgraph-websocket-server",
+  "version": "0.0.1",
+  "description": "SmartGraph web socket server used to connect the SmartGraph Frontend to the Neo4J instance",
+  "main": "websocket-server.ts",
+  "scripts": {
+    "test": "echo \"Error: Tests currently not configured\" && exit 1",
+    "start": "node websocket-server.ts"
+  },
+  "author": "nathan.miller@nextonicsolutions.com",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "neo4j-driver": "^5.9.2",
+    "websocket": "^1.0.24"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.0",
+    "typescript": "4.9.5"
+  }
+}

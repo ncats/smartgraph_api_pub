@@ -1,0 +1,32 @@
+###
+### invariant
+###
+# ports of microservices
+invariant_sg_api_int_port=5070
+invariant_sg_websocket_server_port=1338
+invariant_url_sg_swagger=http://localhost:5070/docs
+
+###
+### environment specific variables
+###
+# local (use this for local testing, URLs and hostnames reflect inter-Docker container communication)
+local_NEO4J_AUTH=neo4j_username/neo4j_pwd
+local_neo4j_host=neo4j_4
+local_neo4j_port_bolt=7687
+local_neo4j_port_web_client=7474
+local_neo4j_user=neo4j_username
+local_neo4j_password=neo4j_pwd
+# ci
+ci_NEO4J_AUTH=neo4j_username/neo4j_pwd
+ci_neo4j_host=ci_url_to_neo4j_server
+ci_neo4j_port_bolt=7687
+ci_neo4j_port_web_client=7474
+ci_neo4j_user=neo4j_username
+ci_neo4j_password=neo4j_pwd
+# prod
+prod_NEO4J_AUTH=neo4j_username/neo4j_pwd
+prod_neo4j_host=prod_url_to_neo4j_server
+prod_neo4j_port_bolt=7687
+prod_neo4j_port_web_client=7474
+prod_neo4j_user=neo4j_username
+prod_neo4j_password=neo4j_pwd
