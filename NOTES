@@ -5,33 +5,48 @@ Note, that these modules might come under different license types as compared to
 
 # Python modules
 
-networkx	[ https://github.com/networkx/networkx]	3-clause BSD license	[ https://networkx.org/documentation/networkx-2.1/license.html , https://github.com/networkx/networkx/blob/main/LICENSE.txt ]
+networkx	[https://github.com/networkx/networkx]	3-clause BSD license	[https://networkx.org/documentation/networkx-2.1/license.html , https://github.com/networkx/networkx/blob/main/LICENSE.txt]
 
-pandas	[ https://github.com/pandas-dev/pandas ]	BSD 3-Clause "New" or "Revised" License	[ https://github.com/pandas-dev/pandas/blob/main/LICENSE ]
+pandas	[https://github.com/pandas-dev/pandas]	BSD 3-Clause "New" or "Revised" License	[https://github.com/pandas-dev/pandas/blob/main/LICENSE]
 
-rdkit	[ https://github.com/rdkit/rdkit ]	BSD 3-Clause "New" or "Revised" License	[ https://github.com/rdkit/rdkit/blob/master/license.txt ]
+rdkit	[https://github.com/rdkit/rdkit]	BSD 3-Clause "New" or "Revised" License	[https://github.com/rdkit/rdkit/blob/master/license.txt]
 
-requests	[ https://github.com/psf/requests/ ]	Apache License 2.0	[ https://github.com/psf/requests/blob/main/LICENSE ]
+requests	[https://github.com/psf/requests/]	Apache License 2.0	[https://github.com/psf/requests/blob/main/LICENSE]
 
-pydantic	[ https://github.com/pydantic/pydantic/ ]	MIT License	[ https://github.com/pydantic/pydantic/blob/main/LICENSE ]
+pydantic	[https://github.com/pydantic/pydantic/]	MIT License	[https://github.com/pydantic/pydantic/blob/main/LICENSE]
 
-orjson	[ https://github.com/ijl/orjson/ ]	MIT License, Apache License 2.0	[ https://github.com/ijl/orjson/blob/master/LICENSE-MIT , https://github.com/ijl/orjson/blob/master/LICENSE-APACHE ]
+orjson	[https://github.com/ijl/orjson/]	MIT License, Apache License 2.0	[https://github.com/ijl/orjson/blob/master/LICENSE-MIT , https://github.com/ijl/orjson/blob/master/LICENSE-APACHE]
 
-uvicorn	[ https://github.com/encode/uvicorn/ ]	BSD 3-Clause "New" or "Revised" License	[ https://github.com/encode/uvicorn/blob/master/LICENSE.md ]
+uvicorn	[https://github.com/encode/uvicorn/]	BSD 3-Clause "New" or "Revised" License	[https://github.com/encode/uvicorn/blob/master/LICENSE.md]
 
-fastapi	[ https://github.com/tiangolo/fastapi/ ]	MIT License	[ https://github.com/tiangolo/fastapi/blob/master/LICENSE ]
+fastapi	[https://github.com/tiangolo/fastapi/]	MIT License	[https://github.com/tiangolo/fastapi/blob/master/LICENSE]
 
-neo4j Python driver	[ https://github.com/neo4j/neo4j-python-driver/ ]	Apache License 2.0, Python Software Foundation License Version 2	[ https://github.com/neo4j/neo4j-python-driver/blob/5.0/LICENSE.txt , https://github.com/neo4j/neo4j-python-driver/blob/5.0/LICENSE.APACHE2.txt , https://github.com/neo4j/neo4j-python-driver/blob/5.0/LICENSE.PYTHON.txt ]
+neo4j Python driver	[https://github.com/neo4j/neo4j-python-driver/]	Apache License 2.0, Python Software Foundation License Version 2	[https://github.com/neo4j/neo4j-python-driver/blob/5.0/LICENSE.txt , https://github.com/neo4j/neo4j-python-driver/blob/5.0/LICENSE.APACHE2.txt , https://github.com/neo4j/neo4j-python-driver/blob/5.0/LICENSE.PYTHON.txt]
 
 # JavaScript/TypeScript modules
 
-dotenv  [ https://github.com/motdotla/dotenv/blob/master/LICENSE ]  [ BSD 2-Clause "Simplified" License ]
+dotenv  [https://github.com/motdotla/dotenv/]  [BSD 2-Clause "Simplified" License]   [https://github.com/motdotla/dotenv/blob/master/LICENSE]
 
-neo4j-driver    [ https://github.com/neo4j/neo4j-javascript-driver ]  Apache-2.0 License    [ https://github.com/neo4j/neo4j-javascript-driver/blob/5.0/LICENSE ]
+neo4j-driver    [https://github.com/neo4j/neo4j-javascript-driver]  Apache-2.0 License    [https://github.com/neo4j/neo4j-javascript-driver/blob/5.0/LICENSE]
 
-websocket   [ https://github.com/jjxxs/websocket-ts ]   MIT License [ https://github.com/jjxxs/websocket-ts/blob/master/LICENSE ]
+websocket   [https://github.com/jjxxs/websocket-ts]   MIT License [https://github.com/jjxxs/websocket-ts/blob/master/LICENSE]
 
-@types/node [ https://github.com/DefinitelyTyped/DefinitelyTyped ]  MIT License [ https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/LICENSE ]
+@types/node [https://github.com/DefinitelyTyped/DefinitelyTyped]  MIT License [https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/LICENSE]
 
-typescript  [ https://github.com/microsoft/TypeScript ] Apache License 2.0  [ https://github.com/microsoft/TypeScript/blob/main/LICENSE.txt ]
+typescript  [https://github.com/microsoft/TypeScript] Apache License 2.0  [https://github.com/microsoft/TypeScript/blob/main/LICENSE.txt]
 
+
+# Docker modules
+
+neo4j:5.7.0-community Docker base image [https://hub.docker.com/_/neo4j]   GPL v3 license  [https://neo4j.com/licensing/, https://www.gnu.org/licenses/quick-guide-gplv3.html]
+
+mambaorg/micromamba:1.5.3 Docker base image [https://github.com/mamba-org/micromamba-docker]  Apache License 2.0  [https://github.com/mamba-org/micromamba-docker/blob/main/LICENSE]
+
+
+p7zip   [https://packages.debian.org/sid/p7zip-full]  7zip License    [https://7-zip.org/license.txt]
+awscli  [https://github.com/aws/aws-cli] Apache 2.0  [https://github.com/aws/aws-cli/blob/develop/LICENSE.txt]
+vim [https://github.com/vim/vim]    Vim License [https://github.com/vim/vim/blob/master/LICENSE]
+telnet  [https://packages.debian.org/bookworm/telnet]   GPL-3.0 [https://www.gnu.org/software/inetutils/manual/inetutils.html#GNU-Free-Documentation-License]
+iputils-ping    [https://github.com/iputils/iputils/]   BSD-3-Clause    [https://github.com/iputils/iputils/blob/master/LICENSE]
+make    [https://savannah.gnu.org/projects/make/]   GPL-3   [https://www.gnu.org/licenses/gpl-3.0.html]
+g++ [https://github.com/gcc-mirror/gcc] GCC License (based on GPL-3)    [https://github.com/gcc-mirror/gcc/blob/master/COPYING.RUNTIME]
