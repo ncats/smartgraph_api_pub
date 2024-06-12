@@ -1,5 +1,5 @@
 # NodeJS docker image for gateway
-ARG NODE_IMAGE_VERSION=19-alpine
+ARG NODE_IMAGE_VERSION=20.13.0-alpine
 ARG PORT=${sg_websocket_server_port}
 
 FROM node:${NODE_IMAGE_VERSION}
