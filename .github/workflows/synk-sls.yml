@@ -128,7 +128,7 @@ jobs:
 
       # Step 2: Add the command to start Docker image on port 5058
       - name: Start Docker image on port 5058
-        run: docker run -d -p 5058:5058 -e sg_api_int_port=5058 ncats/smartgraph_api:${{ needs.Snyk-Docker-Image.outputs.build_version }}
+        run: docker run -d -p 5058:5058 -e SMARTGRAPH_UI_URL=https://randomurl.com -e sg_api_int_port=5058 -e SMARTGRAPH_API_SWAGGER_URL=https://randomurl.com/docs -e SMARTGRAPH_API_BASE_PATH=/api -e WRITE_CONFIG=true ncats/smartgraph_api:${{ needs.Snyk-Docker-Image.outputs.build_version }}
         continue-on-error: true
       # Step 3: ZAP BASELINE SCAN
       - name: ZAP base Scan
