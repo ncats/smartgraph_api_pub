@@ -5,7 +5,7 @@ name: "CodeQL-Advanced"
 on:
   push:
     branches:
-      - SLS
+      - main
   pull_request:
     branches:
       - main
