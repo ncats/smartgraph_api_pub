@@ -5,7 +5,7 @@ name: snyk-zap
 on:
   push:
     branches:
-      - SLS
+      - main
   pull_request:
     branches:
       - main
