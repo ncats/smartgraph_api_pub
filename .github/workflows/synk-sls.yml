@@ -15,7 +15,8 @@ on:
 jobs:
   # Job to build and push the ZAP Docker image to Docker Hub
   Snyk-Docker-Image:
-    runs-on: aws-ln-githubrunner-dv-v-02
+    runs-on:
+      group: ncats-awsci-runners
     permissions:
       actions: read
       contents: read
