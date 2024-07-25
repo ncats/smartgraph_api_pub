@@ -108,7 +108,6 @@ jobs:
         with: 
             name: reports
             path: ./*.pdf
-
   ZAP-Docker-Scan:
     needs: Snyk-Docker-Image
     runs-on: ${{needs.Snyk-Docker-Image.outputs.RUNNER}}
