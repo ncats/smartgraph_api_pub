@@ -1,8 +1,19 @@
 # SmartGraph API
 
-## Overview
+## Cite Us
 
-The repository manages the source code of SmartGraph API used for the ASPIRE program.
+[Zahoránszky-Kőhalmi G, Walker B, Miller N, Yang B, Penna DVL, Binder J, et al. SmartGraph API: Programmatic Knowledge Mining in Network- Pharmacology Setting. ChemRxiv. 2024; doi:10.26434/chemrxiv-2024-0psx3 This content is a preprint and has not been peer-reviewed.](https://chemrxiv.org/engage/chemrxiv/article-details/65a18b9d9138d23161c824ec)
+
+
+<BR>
+
+<img src="data/images/FigureS1.png" alt="SmartGraph API Main Functionalities" style="height: 400; width:600;"/>
+
+<BR>
+
+<img src="data/images/Fig1.png" alt="SmartGraph API Case Study" style="400: ; width:600;"/>
+
+<BR>
 
 ## Local Deployment
 
@@ -46,3 +57,11 @@ In the command above, replace the "path_to_config_template_files" with the actua
 ## Documentation via SWAGGER
 
 Visit `http://127.0.0.1:5070/docs` or use the URL respective to the deployment type (CI/QA/Prod).
+
+
+## License Related Remarks
+
+
+This repository contains a `data` subdirectory, all of its content (recursively) falls under the CC BY 4.0 International license as indicated by the `data/LICENSE` file. All other files and directories fall under the MIT source code license as indicated by the `LICENSE` file in the root of this repository. 
+
+Please observe the `data/NOTES` and `NOTES` file (latter in the root of this repository) for additional information in relevant to license issues.
