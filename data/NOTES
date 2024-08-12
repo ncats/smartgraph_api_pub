@@ -1,0 +1,12 @@
+*Input Data Sources*
+					
+Dataset	Origin				
+
+SmartGraph (ChEMBL, SIGNOR 2.0)	[ https://smartgraph.scb-ncats.io/api/docs ] , 	SIGNOR db 2.0 [ https://signor.uniroma2.it/user_guide.php ]: Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) [ https://creativecommons.org/licenses/by-sa/4.0/ ]	ChEMBL DB version 24 [ https://chembl.gitbook.io/chembl-interface-documentation/about ]: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) [ https://creativecommons.org/licenses/by-sa/3.0/ ]	
+
+
+
+*Derivative Works*
+					
+All data and images (with the exception of `data/images/FigureS1`, which is released under CC BY 4.0 International license) in this repository can be considered as the derivative work of SIGNOR db 2.0 [ https://signor.uniroma2.it/user_guide.php ]: Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) [ https://creativecommons.org/licenses/by-sa/4.0/ ]	and ChEMBL DB version 24 [ https://chembl.gitbook.io/chembl-interface-documentation/about ]: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) [ https://creativecommons.org/licenses/by-sa/3.0/ ]	.		
+
