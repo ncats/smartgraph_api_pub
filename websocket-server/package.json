@@ -10,7 +10,7 @@
   "author": "nathan.miller@nextonicsolutions.com",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "neo4j-driver": "^5.9.2",
+    "neo4j-driver": "^5.26.0",
     "websocket": "^1.0.24"
   },
   "devDependencies": {
